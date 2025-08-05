@@ -91,6 +91,7 @@ export const dummyProducts = [
     name: "Potato 500g",
     category: "vegetables",
     price: 25,
+    offerPrice: 20,
     image: [potatoImg1, potatoImg2, potatoImg3],
     description: [
       "Fresh and organic",
@@ -106,6 +107,7 @@ export const dummyProducts = [
     name: "Tomato 500g",
     category: "vegetables",
     price: 30,
+    offerPrice: 25,
     image: [tomatoImg1, tomatoImg2, tomatoImg3],
     description: [
       "Juicy and ripe",
@@ -121,6 +123,7 @@ export const dummyProducts = [
     name: "Fresh Cow Milk 1L",
     category: "dairy-products",
     price: 55,
+    offerPrice: 50,
     image: [milkImg1, milkImg2, milkImg3],
     description: [
       "Pure and fresh",
@@ -129,6 +132,6 @@ export const dummyProducts = [
     ],
     createdAt: "2025-08-25T07:23:00.500Z",
     updatedAt: "2025-08-25T07:24:32.199Z",
-    inStock: false,
+    inStock: true,
   },
 ];

@@ -10,7 +10,7 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
 
-  const currency  = import.meta.env.VITE_CURRENCY;
+  const currency  = import.meta.env.VITE_CURRENCY || '₹';
 
   const navigate  = useNavigate();
   const [user, setUser] = useState(null);
@@ -23,11 +23,11 @@ export const AppContextProvider = ({ children }) => {
 
 // fatch all product
   const fetchProducts = async () => {
-    setProducts([dummyProducts]);
+    setProducts(dummyProducts);
   }
 
   // add product to cart
-  const addToCart = () => {
+  const addToCart = (itemId) => {
     let cartData = structuredClone(cartItems);
 
     if(cartData[itemId]){
@@ -39,12 +39,39 @@ export const AppContextProvider = ({ children }) => {
     toast.success("Added to cart")
   }
 
+
+  // update cart item quantity
+  const updateCartItem = (itemId, quantity) => {
+ if (quantity < 0) return;
+    let cartData = structuredClone(cartItems);
+
+    cartData[itemId] = quantity;
+    setCartItems(cartData);
+    toast.success("Cart updated")
+  }
+
+  // remove item from cart
+  const removeCartItem = (itemId) =>{
+    let cartData = structuredClone(cartItems);
+    if(cartData[itemId]){
+      cartData[itemId] -= 1;
+      if(cartData[itemId] === 0){
+        delete cartData[itemId];
+      }
+
+    }
+    toast.success("Item removed from cart")
+    setCartItems(cartData);
+
+  }
+
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const value = {navigate, user, setUser, isSeller, setIsSeller,
-     showUserLogin, setShowUserLogin, products, currency
+     showUserLogin, setShowUserLogin, products, currency, addToCart,
+     updateCartItem,removeCartItem,cartItems
     };
   return <AppContext.Provider value={value}>
     {children}
