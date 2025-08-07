@@ -1,26 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useAppContext } from '../context/AppContext'
+import { useParams } from 'react-router-dom';
+
+
 
 const ProductDetails = () => {
-  const product = {
-        name: "Nike Pegasus 41 shoes",
-        category: "Sports",
-        price: 189,
-        offerPrice: 159,
-        rating: 4,
-        images: [
-            "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage.png",
-            "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage2.png",
-            "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage3.png",
-            "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage4.png"
-        ],
-        description: [
-            "High-quality material",
-            "Comfortable for everyday use",
-            "Available in different sizes"
-        ]
-    };
+ 
+    const { products, navigate, currency, addToCart } = useAppContext();
 
+    const { id } = useParams();
+
+    const [relatedProducts, setRelatedProducts] = useState(product.images[0]);
     const [thumbnail, setThumbnail] = useState(product.images[0]);
+
+    const product = products.find((item) => item._id === id);
+     
+    useEffect(() => {
+        if(products.length > 0){
+            let productsCopy = products.slice();
+            productsCopy = productsCopy.filter((item) => product.category === item.category)
+            setRelatedProducts(productsCopy.slice(0, 5));
+        
+        }
+    },[products])
+
+    
 
     return product && (
         <div className="max-w-6xl w-full px-6">
