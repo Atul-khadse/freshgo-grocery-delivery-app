@@ -15,7 +15,15 @@ const Cart = () => {
         
         const [paymentOption, setPaymentOption] = useState("COD");
 
-
+        const getCart = () => {
+            let tempArray = [];
+            for(const key in cartItems){
+                const product = products.find((item) => item._id === key);
+                product.quantity = cartItems[key];
+                tempArray.push(product); 
+            }
+            setCartArray(tempArray);
+        }
 
 
     return (
