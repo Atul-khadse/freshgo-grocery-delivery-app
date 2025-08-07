@@ -1,4 +1,4 @@
-import React, {  useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { createContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { dummyProducts } from '../assets/assets';
@@ -10,19 +10,19 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
 
-  const currency  = import.meta.env.VITE_CURRENCY || '₹';
+  const currency = import.meta.env.VITE_CURRENCY || '₹';
 
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isSeller, setIsSeller] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
   const [products, setProducts] = useState([]);
 
   const [cartItems, setCartItems] = useState({});
-  const [ searchQuery, setSearchQuery ] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
 
-// fatch all product
+  // fatch all product
   const fetchProducts = async () => {
     setProducts(dummyProducts);
   }
@@ -30,10 +30,9 @@ export const AppContextProvider = ({ children }) => {
   // add product to cart
   const addToCart = (itemId) => {
     let cartData = structuredClone(cartItems);
-
-    if(cartData[itemId]){
+    if (cartData[itemId]) {
       cartData[itemId] += 1;
-    }else{
+    } else {
       cartData[itemId] = 1;
     }
     setCartItems(cartData);
@@ -43,7 +42,7 @@ export const AppContextProvider = ({ children }) => {
 
   // update cart item quantity
   const updateCartItem = (itemId, quantity) => {
- if (quantity < 0) return;
+    if (quantity < 0) return;
     let cartData = structuredClone(cartItems);
 
     cartData[itemId] = quantity;
@@ -52,11 +51,11 @@ export const AppContextProvider = ({ children }) => {
   }
 
   // remove item from cart
-  const removeCartItem = (itemId) =>{
+  const removeCartItem = (itemId) => {
     let cartData = structuredClone(cartItems);
-    if(cartData[itemId]){
+    if (cartData[itemId]) {
       cartData[itemId] -= 1;
-      if(cartData[itemId] === 0){
+      if (cartData[itemId] === 0) {
         delete cartData[itemId];
       }
 
@@ -68,9 +67,9 @@ export const AppContextProvider = ({ children }) => {
 
 
   // get cart item count
-  const getCartCount = () =>{
+  const getCartCount = () => {
     let totalCount = 0;
-    for(let item in cartItems){
+    for (let item in cartItems) {
       totalCount += cartItems[item];
     }
 
@@ -81,15 +80,15 @@ export const AppContextProvider = ({ children }) => {
   // get cart total amount
   const getCartAmount = () => {
     let totalAmount = 0;
-    for(let items in cartItems){
+    for (let items in cartItems) {
       let itemInfo = products.find((product) => product._id === items);
-      if(cartItems[items] > 0){
+      if (cartItems[items] > 0) {
         totalAmount += itemInfo.offerPrice * cartItems[items];
       }
-  }
+    }
 
-  return Math.floor(totalAmount * 100) / 100;
-}
+    return Math.floor(totalAmount * 100) / 100;
+  }
 
 
 
@@ -97,10 +96,12 @@ export const AppContextProvider = ({ children }) => {
     fetchProducts();
   }, []);
 
-  const value = {navigate, user, setUser, isSeller, setIsSeller,
-     showUserLogin, setShowUserLogin, products, currency, addToCart,
-     updateCartItem,removeCartItem,cartItems,searchQuery, setSearchQuery,
-    };
+  const value = {
+    navigate, user, setUser, isSeller, setIsSeller,
+    showUserLogin, setShowUserLogin, products, currency, addToCart,
+    updateCartItem, removeCartItem, cartItems, searchQuery, setSearchQuery,
+    getCartCount,getCartAmount
+  };
   return <AppContext.Provider value={value}>
     {children}
   </AppContext.Provider>
