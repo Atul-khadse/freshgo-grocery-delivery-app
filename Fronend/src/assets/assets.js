@@ -24,7 +24,7 @@ import spinach_500g from './spinach_500g.png';
 import onion_500g from './onion_500g.jpg';
 import apple_1kg from './apple_1kg.jpg';
 import orange_1kg from './orange_1kg.jpg';
-import banana from './banana.jpg0';
+import banana from './banana.jpg';
 import mango_1kg from './mango_1kg.jpg'
 import grapes_500g from './grapes_500g.jpg'
 

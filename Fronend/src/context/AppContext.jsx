@@ -19,6 +19,7 @@ export const AppContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   const [cartItems, setCartItems] = useState({});
+  const [ searchQuery, setSearchQuery ] = useState("");
 
 
 // fatch all product
@@ -71,7 +72,7 @@ export const AppContextProvider = ({ children }) => {
 
   const value = {navigate, user, setUser, isSeller, setIsSeller,
      showUserLogin, setShowUserLogin, products, currency, addToCart,
-     updateCartItem,removeCartItem,cartItems
+     updateCartItem,removeCartItem,cartItems,searchQuery, setSearchQuery,
     };
   return <AppContext.Provider value={value}>
     {children}
