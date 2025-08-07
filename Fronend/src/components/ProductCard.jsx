@@ -5,13 +5,13 @@ import { useAppContext } from '../context/AppContext';
 
 
 const ProductCard = ({product}) => {
-    const [count, setCount] = React.useState(0);
+   
     const { currency,addToCart,removeCartItem,  updateCartItem, cartItems,navigate } = useAppContext();
 
    
 
     return product && (
-        <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white w-full max-w-[260px]">
+        <div onClick={() => {navigate(`/products/${product.category.toLowerCase()}/${product._id}`); scrollTo(0,0)}} className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white w-full max-w-[260px]">
   <div className="group cursor-pointer w-full h-36 md:h-44 flex items-center justify-center overflow-hidden">
     <img
       className="group-hover:scale-105 transition w-auto max-h-full max-w-[80%]"
