@@ -66,6 +66,21 @@ export const AppContextProvider = ({ children }) => {
 
   }
 
+
+  // get cart item count
+  const getCartCount = () =>{
+    let totalCount = 0;
+    for(let item in cartItems){
+      totalCount += cartItems[item];
+    }
+
+    return totalCount;
+  }
+
+
+
+
+
   useEffect(() => {
     fetchProducts();
   }, []);
