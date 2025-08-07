@@ -157,6 +157,49 @@ export const features = [
 
 
 
+
+export const dummyAddresses = [
+  {
+    id: 1,
+    name: "John Doe",
+    street: "123 Main Street",
+    city: "New York",
+    state: "NY",
+    country: "USA",
+    postalCode: "10001",
+    phone: "123-456-7890"
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    street: "456 Elm Avenue",
+    city: "Los Angeles",
+    state: "CA",
+    country: "USA",
+    postalCode: "90001",
+    phone: "987-654-3210"
+  },
+  {
+    id: 3,
+    name: "Alice Johnson",
+    street: "789 Oak Road",
+    city: "Chicago",
+    state: "IL",
+    country: "USA",
+    postalCode: "60601",
+    phone: "555-123-4567"
+  }
+];
+
+
+
+
+
+
+
+
+
+
 export const dummyProducts = [
   {
     _id: "gd46g23h",
