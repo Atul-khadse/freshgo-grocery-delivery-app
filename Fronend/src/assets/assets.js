@@ -9,7 +9,7 @@ import bakery from './bakery.jpg';
 import grains from './grains.jpg';
 
 
-
+import { FaTruck, FaLeaf, FaCoins, FaHeart } from "react-icons/fa";
 
 
 import potatoImg1 from './potato_1.jpg';
@@ -81,6 +81,30 @@ export const categories = [
 ];
 
 
+
+
+export const features = [
+  {
+    icon: FaTruck,
+    title: "Fastest Delivery",
+    description: "Groceries delivered in under 30 minutes.",
+  },
+  {
+    icon: FaLeaf,
+    title: "Freshness Guaranteed",
+    description: "Fresh products straight from the source.",
+  },
+  {
+    icon: FaCoins,
+    title: "Affordable Prices",
+    description: "Quality groceries at unbeatable prices.",
+  },
+  {
+    icon: FaHeart,
+    title: "Trusted by Thousands",
+    description: "Loved by 10,000+ happy customers.",
+  },
+];
 
 
 
