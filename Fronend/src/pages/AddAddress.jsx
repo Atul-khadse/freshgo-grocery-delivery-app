@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import address_man from '../assets/address_man.png'
 
 // input field component
-const inputField = ({ type, placeholder, name, handleChange, address}) => (
+const InputField = ({ type, placeholder, name, handleChange, address}) => (
     <input className='w-full px-2 py-2.5 border border-gray-500/30 rounded outline-none text-gray-500 focus:border-primary transition'
      type={type} 
     placeholder={placeholder}
@@ -31,11 +31,18 @@ const AddAddress = () => {
   })
 
 
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  setAddress((prevAddress) => ({
+    ...AddAddress,
+    [name]: value,
+  }))
+} 
 
 
 
 
-  
 const onsubmitHandler = async (e) => {
     e.preventDefault();
 }
@@ -49,8 +56,8 @@ const onsubmitHandler = async (e) => {
             <div className='flex-1 max-w-md'>
             <form onClick={onsubmitHandler} className='space-y-3 mt-6 text-sm'>
               <div>
-                <inputField handleChange={handleChange} address={address} name="firstName" type="text" placeholder="first Name" />
-                <inputField handleChange={handleChange} address={address} name="lastName" type="text" placeholder="last Name" />
+                <InputField handleChange={handleChange} address={address} name="firstName" type="text" placeholder="first Name" />
+                <InputField handleChange={handleChange} address={address} name="lastName" type="text" placeholder="last Name" />
 
               </div>
             </form>
