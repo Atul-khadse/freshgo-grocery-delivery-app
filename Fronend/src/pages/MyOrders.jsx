@@ -1,68 +1,75 @@
-import React,{ useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../context/AppContext';
-import { dummyAddresses } from '../assets/assets';
+import { dummyOrders } from '../assets/assets';
 
 const MyOrders = () => {
-
   const [myOrders, setMyOrders] = useState([]);
-  const {currency } = useAppContext();
+  const { currency } = useAppContext();
 
-const fetchOrders = async () => {
-  setMyOrders(dummyAddresses);
-}
+  const fetchOrders = async () => {
+    setMyOrders(dummyOrders);
+  }
 
-useEffect(() => {
-  fetchOrders()
-},[])
-
+  useEffect(() => {
+    fetchOrders()
+  }, [])
 
   return (
-    <div className='mt-16 pb-16 '>
-      <div className='flex flex-col items-end w-max mb-8'>
-        <p className='text-2xl font-medium uppercase'> My orders</p>
-        <div className='w-16 h-0.5 bg-primary rounded-full'>
+    <div className="mt-16 pb-16 px-4 md:px-8 max-w-screen-xl mx-auto">
+      <div className="flex flex-col items-start md:items-end w-full md:w-max mb-8">
+        <p className="text-2xl font-medium uppercase mb-1">My Orders</p>
+        <div className="w-16 h-0.5 bg-primary rounded-full"></div>
+      </div>
 
-        </div>
-        {myOrders.map((order, index) => (
-          <div key={index} className='border border-gray-300 rounded-lg mb-10 p-4 py-5 max-w-4xl'>
-            <p>
-              <span>OrderId: {order._id}</span>
+      <div className="flex flex-col gap-10">
+        {myOrders.map((order) => (
+          <div
+            key={order._id}
+            className="border border-gray-300 rounded-lg p-4 sm:p-6 max-w-full mx-auto"
+          >
+            <p className="flex flex-col sm:flex-row sm:items-center sm:gap-6 text-sm sm:text-base mb-6 flex-wrap">
+              <span className="truncate max-w-xs">OrderId: {order._id}</span>
               <span>Payment: {order.paymentType}</span>
               <span>Total Amount: {currency}{order.amount}</span>
-
             </p>
-            {order.items.map((item, index) => (
-              <div key={index} className={`relative bg-white text-grasy-500/70 ${order.items.length !== index + 1 && "border-b"} border-gray-300 flex flex-col md:flex-row md:items-center justify-betweenp-4 py-5 md:gap-16 w-full max-w-4xl`}>
-                <div className='flex items-center mb-4 md:mb-0'>
-                  <div className='bg-primary/10 p-4 rounded-lg'>
-                  <img src={item.product.image[0]} alt=""  className='w-16 h-16'/>
+
+            <div className="flex flex-col divide-y divide-gray-300">
+              {order.items.map((item, idx) => (
+                <div
+                  key={item.product._id || idx}
+                  className="flex flex-col md:flex-row md:items-center justify-between py-4 md:py-5 gap-4 md:gap-16"
+                >
+                  <div className="flex items-center w-full md:w-auto gap-4">
+                    <div className="bg-primary/10 p-3 rounded-lg flex-shrink-0">
+                      <img
+                        src={item.product.image[0]}
+                        alt={item.product.name}
+                        className="w-16 h-16 object-cover rounded"
+                      />
+                    </div>
+                    <div className="ml-0 md:ml-4 min-w-0">
+                      <h2 className="text-lg sm:text-xl font-medium text-gray-800 truncate">{item.product.name}</h2>
+                      <p className="text-sm truncate">Category: {item.product.category}</p>
+                    </div>
                   </div>
-                  <div className='ml-4'>
-                    <h2 className='text-xl font-medium text-gray-800'>{item.product.name}</h2>
-                    <p>Category: {item.product.category}</p>
+
+                  <div className="text-primary text-sm sm:text-lg font-medium flex flex-col gap-1 whitespace-nowrap">
+                    <p>Quantity: {item.quantity || "1"}</p>
+                    <p>Status: {order.status}</p>
+                    <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
                   </div>
+
+                  <p className="text-primary text-sm sm:text-lg font-medium whitespace-nowrap">
+                    Amount: {currency}{item.product.offerPrice * (item.quantity || 1)}
+                  </p>
                 </div>
-
-                <div className='text-primary text-lg font-medium'>
-                  <p>Quantity:{item.quantity || "1"}</p>
-                  <p>Status:{order.status}</p>
-                  <p>Date:{new Date(order.createdAt).toLocaleDateString()}</p>
-
-
-                </div>
-
-                <p className='text-primary text-lg font-medium'>
-                  Amount: {currency}{item.product.offerPrice * (item.quantity)}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         ))}
       </div>
-
-      
     </div>
   )
 }
 
-export default MyOrders
+export default MyOrders;

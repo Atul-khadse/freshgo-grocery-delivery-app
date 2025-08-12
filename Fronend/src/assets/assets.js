@@ -171,7 +171,7 @@ export const dummyOrders = [
         product: {
           name: "Apple",
           category: "Fruits",
-          image: ["https://via.placeholder.com/80"],
+          image: [apple_1kg],
           offerPrice: 50
         }
       },
@@ -180,7 +180,7 @@ export const dummyOrders = [
         product: {
           name: "Banana",
           category: "Fruits",
-          image: ["https://via.placeholder.com/80"],
+          image: [banana],
           offerPrice: 25
         }
       }
