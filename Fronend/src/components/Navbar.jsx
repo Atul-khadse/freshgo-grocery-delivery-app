@@ -69,14 +69,14 @@ const Navbar = () => {
         {!user ? (
           <button
             onClick={() => setShowUserLogin(true)}
-            className="bg-primary text-white px-6 py-2 rounded-full hover:bg-indigo-600 transition"
+            className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/40 transition"
           >
             Login
           </button>
         ) : (
           <div className="relative group">
             <img src={profile} className="w-10 h-10 rounded-full cursor-pointer" alt="profile" />
-            <ul className="absolute right-0 top-12 w-32 bg-white shadow-md rounded-md text-sm hidden group-hover:block z-50">
+            <ul className="absolute right-0 top-10 w-30 bg-white shadow-md rounded-md text-sm hidden group-hover:block z-40">
               <li onClick={() => navigate('/my-orders')} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Orders</li>
               <li onClick={logout} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
             </ul>
