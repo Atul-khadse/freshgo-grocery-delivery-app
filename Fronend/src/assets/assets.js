@@ -185,6 +185,22 @@ export const dummyOrders = [
         }
       }
     ]
+  },
+  {
+    _id: "order321",
+    paymentType: "Cash on Delivery",
+    amount: 100,
+    status: "Pending",
+    createdAt: "2025-08-13T08:00:00Z",
+    items:[{
+        quantity: 1,
+        product: {
+          name: "Apple",
+          category: "Fruits",
+          image: [apple_1kg],
+          offerPrice: 50
+        }
+      }]
   }
 ];
 
