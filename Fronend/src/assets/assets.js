@@ -158,6 +158,35 @@ export const features = [
 
 
 
+export const dummyOrders = [
+  {
+    _id: "order123",
+    paymentType: "Cash on Delivery",
+    amount: 100,
+    status: "Pending",
+    createdAt: "2025-08-13T08:00:00Z",
+    items: [
+      {
+        quantity: 1,
+        product: {
+          name: "Apple",
+          category: "Fruits",
+          image: ["https://via.placeholder.com/80"],
+          offerPrice: 50
+        }
+      },
+      {
+        quantity: 2,
+        product: {
+          name: "Banana",
+          category: "Fruits",
+          image: ["https://via.placeholder.com/80"],
+          offerPrice: 25
+        }
+      }
+    ]
+  }
+];
 
 
 
