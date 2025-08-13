@@ -25,7 +25,7 @@ const MyOrders = () => {
         {myOrders.map((order) => (
           <div
             key={order._id}
-            className="border border-gray-300 rounded-lg p-4 sm:p-6 max-w-full mx-auto"
+            className="border border-gray-300 rounded-lg p-4 sm:p-6 w-full mx-auto"
           >
             <p className="flex flex-col sm:flex-row sm:items-center sm:gap-6 text-sm sm:text-base mb-6 flex-wrap">
               <span className="truncate max-w-xs">OrderId: {order._id}</span>
