@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppContext } from '../../context/AppContext';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/fresh_go_logo.png';
 
 const SellerLayout = () => {
@@ -55,20 +55,23 @@ const logout = async () => {
                     <button onClick={logout} className='border rounded-full text-sm px-4 py-1'>Logout</button>
                 </div>
             </div>
-            <div className="md:w-64 w-16 border-r h-[550px] text-base border-gray-300 pt-4 flex flex-col transition-all duration-300">
-                {sidebarLinks.map((item, index) => (
-                    <a href={item.path} key={index}
-                        className={`flex items-center py-3 px-4 gap-3 
-                            ${index === 0 ? "border-r-4 md:border-r-[6px] bg-indigo-500/10 border-primary text-primary"
+            <div className='flex'>
+                <div className="md:w-64 w-16 border-r h-[550px] text-base border-gray-300 pt-4 flex flex-col transition-all duration-300">
+                {sidebarLinks.map((item) => (
+                    <NavLink to={item.path} key={item.name} end={item.path === '/seller'}
+                        className={({isActive})=>`flex items-center py-3 px-4 gap-3 
+                            ${isActive ? "border-r-4 md:border-r-[6px] bg-primary/10 border-primary text-primary"
                                 : "hover:bg-gray-100/90 border-white text-gray-700"
                             }`
                         }
                     >
                         {item.icon}
                         <p className="md:block hidden text-center">{item.name}</p>
-                    </a>
+                    </NavLink>
                 ))}
             </div>
+            </div>
+            
         </>
     )
 }
