@@ -27,15 +27,16 @@ useEffect(() => {
                 <div key={index} className="flex flex-col md:flex-row justify-between md:items-center gap-5 p-5 max-w-4xl rounded-md border border-gray-300 ">
                     <div className="flex gap-5 max-w-80">
                         <img className="w-12 h-12 object-cover opacity-60" src={boxIcon} alt="boxIcon" />
-                        <>
+                        <div>
                             {order.items.map((item, index) => (
                                 <div key={index} className="flex flex-col justify-center">
                                     <p className="font-medium">
-                                        {item.product.name} <span className='text-primary'>x {item.quantity}</span>
+                                        {item.product.name}{" "}
+                                        <span className='text-primary'>x {item.quantity}</span>
                                     </p>
                                 </div>
                             ))}
-                        </>
+                        </div>
                     </div>
 
                     <div className="text-sm md:text-base text-black/60">
