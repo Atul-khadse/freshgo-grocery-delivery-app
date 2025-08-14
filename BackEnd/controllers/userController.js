@@ -23,7 +23,12 @@ export const register = async (req, res) => {
 
         const user = await User.create({naem, email, password: hashedPassword})
 
-        const token = jwt.sign({id: user._id}, )
+        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '7d'})
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production'
+        })
     } catch (error) {
         
     }
