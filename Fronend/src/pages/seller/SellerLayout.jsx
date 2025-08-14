@@ -5,7 +5,7 @@ import logo from '../assets/fresh_go_logo.png';
 
 const SellerLayout = () => {
 
-    const {isSeller } = useAppContext(); 
+    const {isSeller, setIsSeller} = useAppContext(); 
 
 
     const dashboardicon = (
@@ -37,10 +37,12 @@ const SellerLayout = () => {
 
 
 
+const logout = async () => {
+    setIsSeller(false);
+}
 
 
 
-    
 
     return (
         <>
