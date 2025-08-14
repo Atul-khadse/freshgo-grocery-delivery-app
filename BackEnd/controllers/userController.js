@@ -1,6 +1,7 @@
 import User from "../models/User";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { use } from "react";
 
 // register user
 
@@ -27,8 +28,14 @@ export const register = async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production'
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+            maxAge: 7 * 24 * 60 * 1000,
         })
+
+
+                   return res.json({success: true, user: {email: user.email, name: user.naem}})
+
     } catch (error) {
         
     }
