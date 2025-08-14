@@ -120,6 +120,8 @@ export const logout = async (req, res) =>{
         })
         return res.json({ success:true ,message:"logged out" })
     } catch (error) {
-        
+          console.log(error.message)
+        return res.json({ success: false, message: error.message })
+
     }
 }
