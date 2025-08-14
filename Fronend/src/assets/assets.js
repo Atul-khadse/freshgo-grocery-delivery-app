@@ -165,6 +165,16 @@ export const dummyOrders = [
     amount: 100,
     status: "Pending",
     createdAt: "2025-08-13T08:00:00Z",
+     address: {
+      firstName: "John",
+      lastName: "Doe",
+      street: "123 Main Street",
+      city: "New York",
+      zipcode:444504,
+      state:"Maharastra",
+      country:"India",
+      phone:9323124319
+    },
     items: [
       {
         quantity: 1,
@@ -192,6 +202,16 @@ export const dummyOrders = [
     amount: 100,
     status: "Pending",
     createdAt: "2025-08-13T08:00:00Z",
+     address: {
+      firstName: "Jane",
+      lastName: "Smith",
+      street: "456 Market Street",
+      city: "Los Angeles",
+      zipcode: 90001,
+      state: "California",
+      country: "USA",
+      phone: 9876543210
+    },
     items:[{
         quantity: 1,
         product: {
