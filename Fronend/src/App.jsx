@@ -14,6 +14,7 @@ import AddAddress from './pages/AddAddress.jsx'
 import MyOrders from './pages/MyOrders.jsx'
 import SellerLogin from './components/seller/SellerLogin.jsx'
 import SellerLayout from './pages/seller/SellerLayout.jsx'
+import AddProduct from './pages/seller/AddProduct.jsx'
 
 
 
@@ -39,6 +40,10 @@ const App = () => {
           <Route path='/add-address' element={<AddAddress />} />
           <Route path='/my-orders' element={<MyOrders />} />
           <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLogin />} />
+          <Route index element={isSeller ? <AddProduct/> : null} />
+          <Route path='product-list' element={isSeller ? <AddProduct/> : null} />
+
+
 
 
 

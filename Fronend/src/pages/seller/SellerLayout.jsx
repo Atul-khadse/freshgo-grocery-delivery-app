@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppContext } from '../../context/AppContext';
 import { Link, NavLink } from 'react-router-dom';
-import logo from '../assets/fresh_go_logo.png';
+import logo from '../../assets/fresh_go_logo.png';
 
 const SellerLayout = () => {
 
@@ -70,7 +70,7 @@ const logout = async () => {
                     </NavLink>
                 ))}
             </div>
-            <Outlet/>
+           
             </div>
             
         </>
