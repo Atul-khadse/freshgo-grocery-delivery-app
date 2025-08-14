@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const AddProduct = () => {
+
+    const [files, setFiles] = useState([]);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [category, setCategory] = useState([]);
+    const [price, setPrice] = useState([]);
+    const [offerPrice, setOfferPrice] = useState([]);
+
+    
+
+
+
+
   return (
-        <div className="py-10 flex flex-col justify-between bg-white">
+        <div className="no-scrollbar flex-1 h-[96vh] overflow-y-scroll flex flex-col justify-between">
             <form className="md:p-10 p-4 space-y-5 max-w-lg">
                 <div>
                     <p className="text-base font-medium">Product Image</p>
