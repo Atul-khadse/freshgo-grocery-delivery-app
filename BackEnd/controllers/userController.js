@@ -68,6 +68,21 @@ export const login = async (req, res) => {
             return res.json({success: false, message:"Invalid eamil or password"})
             
         }
+
+
+        
+        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '7d'})
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+            maxAge: 7 * 24 * 60 * 1000,
+        })
+
+
+                   return res.json({success: true, user: {email: user.email, name: user.name}})
+
     } catch (error) {
         
     }
