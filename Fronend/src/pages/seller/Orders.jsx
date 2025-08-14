@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../../context/AppContext'
 import { dummyOrders } from '../../assets/assets';
 
@@ -13,7 +13,9 @@ const fetchOrders = async () => {
 }
 
 
-
+useEffect(() => {
+  fetchOrders();
+},[]) 
 
 
   return (
