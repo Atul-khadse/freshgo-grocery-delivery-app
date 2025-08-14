@@ -70,6 +70,7 @@ const logout = async () => {
                     </NavLink>
                 ))}
             </div>
+            <Outlet/>
             </div>
             
         </>
