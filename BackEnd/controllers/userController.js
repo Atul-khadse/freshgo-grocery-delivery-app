@@ -1,7 +1,7 @@
-import User from "../models/User";
+import User from "../models/User.js";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
-import { use } from "react";
+
 
 // register user
 
@@ -22,7 +22,7 @@ export const register = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10)
 
-        const user = await User.create({naem, email, password: hashedPassword})
+        const user = await User.create({name, email, password: hashedPassword})
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '7d'})
 
@@ -34,7 +34,7 @@ export const register = async (req, res) => {
         })
 
 
-                   return res.json({success: true, user: {email: user.email, name: user.naem}})
+                   return res.json({success: true, user: {email: user.email, name: user.name}})
 
     } catch (error) {
         console.log(error.message)
