@@ -30,11 +30,12 @@ export const register = async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-            maxAge: 7 * 24 * 60 * 1000,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
         })
 
 
-        return res.json({ success: true, user: { email: user.email, name: user.name } })
+        return res.json({ success: true, user: { id: user._id, email: user.email, name: user.name } })
+        
 
     } catch (error) {
         console.log(error.message)
@@ -77,11 +78,12 @@ export const login = async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-            maxAge: 7 * 24 * 60 * 1000,
+            maxAge: 7 * 24 * 60 * 60 * 1000
         })
 
 
-        return res.json({ success: true, user: { email: user.email, name: user.name } })
+        return res.json({ success: true, user: { id: user._id, email: user.email, name: user.name } })
+
 
     } catch (error) {
             console.log(error.message)
@@ -98,9 +100,10 @@ export const login = async (req, res) => {
 
 export const isAuth = async (req , res) =>{
     try {
-        const { userId } = req.body
+        const userId  = req.userId;
         const user = await User.findById(userId).select("-password")
-        return res.json({success: true, user})
+        
+        return res.json({success: true, user});
     } catch (error) {
           console.log(error.message)
         return res.json({ success: false, message: error.message })
