@@ -31,7 +31,13 @@ export const addProduct = async (req , res ) => {
 
 // Get Product
 export const productList = async (req , res ) => {
-    
+    try {
+        const products = await Product.find({});
+        req.json({ success: true , products});
+    } catch (error) {
+        console.log(error.message);
+        res.json({ success: false , message: error.message});
+    }
 }
 
 
