@@ -10,7 +10,7 @@ export const sellerLogin = async (req , res) =>{
         const token = jwt.sign({email}, process.env.JWT_SECRET, { expiresIn: '7d' });
 
 
-        res.cookie('sellerToken ', token, {
+        res.cookie('sellerToken', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
@@ -33,6 +33,25 @@ export const sellerLogin = async (req , res) =>{
 export const isSellerAuth = async (req , res) =>{
     try { 
         return res.json({success: true, user});
+    } catch (error) {
+          console.log(error.message)
+        return res.json({ success: false, message: error.message })
+
+    }
+}
+
+
+
+//Logout seller 
+
+export const sellerLogout = async (req, res) =>{
+    try {
+        res.clearCookie('sellerToken',{
+              httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+        })
+        return res.json({ success:true ,message:"seller logged out" })
     } catch (error) {
           console.log(error.message)
         return res.json({ success: false, message: error.message })
