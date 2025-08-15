@@ -26,3 +26,16 @@ export const sellerLogin = async (req , res) =>{
         res.json({success: false, message: error.message});
     }
 }
+
+
+// seller isAuth
+
+export const isSellerAuth = async (req , res) =>{
+    try { 
+        return res.json({success: true, user});
+    } catch (error) {
+          console.log(error.message)
+        return res.json({ success: false, message: error.message })
+
+    }
+}
