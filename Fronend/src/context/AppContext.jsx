@@ -27,12 +27,12 @@ export const AppContextProvider = ({ children }) => {
 
 
   // fetch seller status
-  const fetchSeller  = async () =>{
+  const fetchSeller = async () => {
     try {
-      const {data} = await axios.get('/api/seller/is-auth');
+      const { data } = await axios.get('/api/seller/is-auth');
       if (data.success) {
         setIsSeller(true)
-      }else{
+      } else {
         setIsSeller(false)
       }
     } catch (error) {
@@ -43,7 +43,17 @@ export const AppContextProvider = ({ children }) => {
 
   // fatch all product
   const fetchProducts = async () => {
-    setProducts(dummyProducts);
+    try {
+          const { data} = await axios.get('/api/product/list')
+          if (data.success) {
+            setProducts(data.products)
+          }else{
+            toast.error(data.message)
+          }
+    } catch (error) {
+            toast.error(error.message)
+
+    }
   }
 
   // add product to cart
@@ -120,7 +130,7 @@ export const AppContextProvider = ({ children }) => {
     navigate, user, setUser, isSeller, setIsSeller,
     showUserLogin, setShowUserLogin, products, currency, addToCart,
     updateCartItem, removeCartItem, cartItems, searchQuery, setSearchQuery,
-    getCartCount,getCartAmount, axios
+    getCartCount, getCartAmount, axios, fetchProducts
   };
   return <AppContext.Provider value={value}>
     {children}
