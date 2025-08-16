@@ -7,8 +7,7 @@ import Stripe from "stripe";
 
 export const placeOrderCOD = async (req ,res) =>{
     try {
-        const { items, address } = req.body;
-        const userId = req.userId;
+        const { items, address,userId  } = req.body;
         if(!address || items.length === 0){
             return res.json({success: false, message: "invalid data"})
         }
@@ -95,7 +94,7 @@ export const placeOrderStripe = async (req ,res) =>{
             productData.push({
                 name: product.name,
                 price: product.offerPrice,
-                quantity: product.quantity,
+                quantity: item.quantity,
             })
             return (await acc) + product.offerPrice * item.quantity;
         }, 0)
@@ -114,7 +113,7 @@ export const placeOrderStripe = async (req ,res) =>{
 
 
         // stripe gateway initialize
-        const stripeInstance = new Stripe(process.env.STRIPE-SECRETE_KEY);
+        const stripeInstance = new Stripe(process.env.STRIPE_SECRETE_KEY);
 
         // create line items for stripe
         const line_items = productData.map((item)=>{
