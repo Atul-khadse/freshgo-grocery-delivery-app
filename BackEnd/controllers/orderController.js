@@ -110,7 +110,13 @@ export const placeOrderStripe = async (req ,res) =>{
             amount,
             address,
             paymentType: "Online",
-        })
+        });
+
+
+        // stripe gateway initialize
+        const stripeInstance = new Stripe(process.env.STRIPE-SECRETE_KEY);
+
+        
 
         return res.json({ success: true, message: "Order Place successfully"})
 
