@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import address_man from '../assets/address_man2.png';
+import { useAppContext } from '../context/AppContext';
 
 // Reusable Input Field Component
 const InputField = ({ type, placeholder, name, handleChange, address }) => (
@@ -15,6 +16,9 @@ const InputField = ({ type, placeholder, name, handleChange, address }) => (
 );
 
 const AddAddress = () => {
+
+  const { axios, user, navigate } = useAppContext();
+
   const [address, setAddress] = useState({
     firstName: '',
     lastName: '',
@@ -38,8 +42,15 @@ const AddAddress = () => {
   };
 
   const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    console.log("Address Saved:", address);
+   try {
+     e.preventDefault();
+
+     const {data} = await axios.post('/api/address/add', {userId: user?._id ,address});
+
+   } catch (error) {
+    
+   }
+   
   };
 
   return (
