@@ -29,8 +29,7 @@ const Cart = () => {
     const getUserAddress = async () =>{
                 try {
                     const {data} = await axios.get('/api/address/get');
-                    if (data.success) {
-                        toast.success(data.message);
+                    if (data.success) {                        
                         setAddresses(data.addresses);
                         if (data.addresses) {
                             setSelectedAddress(data.addresses[0])
