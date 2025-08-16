@@ -44,9 +44,9 @@ export const AppContextProvider = ({ children }) => {
 
 
   // fatech user auth status, user data cart item
-  const fetchUser = async()=>{
+  const fetchUser = async () => {
     try {
-      const {data} = await axios.get('/api/user/is-auth');
+      const { data } = await axios.get('/api/user/is-auth');
       if (data.success) {
         setUser(data.user);
         setCartItems(data.user.cartItems);
@@ -64,14 +64,15 @@ export const AppContextProvider = ({ children }) => {
   // fatch all product
   const fetchProducts = async () => {
     try {
-          const { data} = await axios.get('/api/product/list')
-          if (data.success) {
-            setProducts(data.products)
-          }else{
-            toast.error(data.message)
-          }
+      const { data } = await axios.get('/api/product/list')
+      if (data.success) {
+        setProducts(data.products)
+
+      } else {
+        toast.error(data.message)
+      }
     } catch (error) {
-            toast.error(error.message)
+      toast.error(error.message)
 
     }
   }
