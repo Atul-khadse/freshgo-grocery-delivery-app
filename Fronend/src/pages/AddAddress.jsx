@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import address_man from '../assets/address_man2.png';
 import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
@@ -59,6 +59,14 @@ const AddAddress = () => {
    }
    
   };
+
+useEffect(() => {
+  if (!user) {
+    navigate('/cart');
+  }
+})
+
+
 
   return (
     <div className="mt-16 pb-16 px-4">
