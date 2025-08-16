@@ -5,7 +5,8 @@ import Product from "../models/Product.js";
 
 export const placeOrderCOD = async (req ,res) =>{
     try {
-        const { userId, items, address } = req.body;
+        const { items, address } = req.body;
+        const userId = req.userId;
         if(!address || items.length === 0){
             return res.json({success: false, message: "invalid data"})
         }
@@ -40,7 +41,7 @@ export const placeOrderCOD = async (req ,res) =>{
 // get orders by user id
 export const getUserOrders = async (req, res) =>{
     try {
-        const { userId, } = req.body;
+        const  userId  = req.userId;
         const orders = await Order.find({
             userId,
             $or: [{paymentType: "COD"}, {isPaid: true}]
@@ -59,9 +60,8 @@ export const getUserOrders = async (req, res) =>{
 export const getAllOrders = async (req, res) =>{
     try {
         const orders = await Order.find({
-            userId,
             $or: [{paymentType: "COD"}, {isPaid: true}]
-        }).populate("items.product address").sort({createdAt: -1})
+        }).populate("items.product address userId").sort({createdAt: -1})
         res.json({ success: true, orders});
     } catch (error) {
         return res.json({ success: false, message: error.message})

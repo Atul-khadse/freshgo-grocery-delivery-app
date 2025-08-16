@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../../context/AppContext'
-import { dummyOrders } from '../../assets/assets';
 import boxIcon from '../../assets/boxIcon.jpg'
+import toast from 'react-hot-toast';
 
 const Orders = () => {
 
-const {currency } = useAppContext();
+const {currency, axios } = useAppContext();
 const [orders, setOrders] = useState([]);
 
 
-const fetchOrders = async () => {
-  setOrders(dummyOrders)
-}
+
 
 
 useEffect(() => {
