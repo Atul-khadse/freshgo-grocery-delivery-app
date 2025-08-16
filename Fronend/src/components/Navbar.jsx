@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import logo from '../assets/fresh_go_logo.png';
 import profile from '../assets/profileicon.jpeg';
 import { useAppContext } from '../context/AppContext';
+import toast from 'react-hot-toast';
+
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -13,12 +15,24 @@ const Navbar = () => {
     navigate,
     searchQuery,
     setSearchQuery,
-    getCartCount,
+    getCartCount, axios,
   } = useAppContext();
 
-  const logout = () => {
-    setUser(null);
-    navigate('/');
+  const logout = async () => {
+    try {
+      const { data } = await axios.get('/api/user/logout');
+      if (data.success) {
+        toast.success(data.message);
+        setUser(null);
+        navigate('/');
+      }else{
+        toast.error(data.message);
+      }
+    } catch (error) {
+        toast.error(error.message);
+
+    }
+
   };
 
   useEffect(() => {
