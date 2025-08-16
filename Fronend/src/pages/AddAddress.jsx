@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import address_man from '../assets/address_man2.png';
 import { useAppContext } from '../context/AppContext';
+import toast from 'react-hot-toast';
 
 // Reusable Input Field Component
 const InputField = ({ type, placeholder, name, handleChange, address }) => (
@@ -47,8 +48,14 @@ const AddAddress = () => {
 
      const {data} = await axios.post('/api/address/add', {userId: user?._id ,address});
 
+     if (data.success) {
+      toast.success(data.message);
+      navigate('/cart');
+     }else{
+      toast.error(data.message);
+     }
    } catch (error) {
-    
+    toast.error(error.message);
    }
    
   };
