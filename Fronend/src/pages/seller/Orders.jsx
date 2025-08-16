@@ -9,7 +9,19 @@ const {currency, axios } = useAppContext();
 const [orders, setOrders] = useState([]);
 
 
+const fetchOrders = async () => {
+  try {
+    const {data} = await axios.get('/api/order/seller');
+    if (data.success) {
+        setOrders(data.Orders);
+    }else{
+        toast.error(data.message);
+    }
 
+  } catch (error) {
+    toast.error(error.message);
+  }
+}
 
 
 useEffect(() => {
