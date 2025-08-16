@@ -116,7 +116,19 @@ export const placeOrderStripe = async (req ,res) =>{
         // stripe gateway initialize
         const stripeInstance = new Stripe(process.env.STRIPE-SECRETE_KEY);
 
-        
+        // create line items for stripe
+        const line_items = productData.map((item)=>{
+            return{
+                price_data: {
+                    currency: "usd",
+                    product_data:{
+                        name: item.name,
+                    },
+                    unit_amount: Math.floor(item.price + item.price * 0.02) * 100
+                },
+                quantity: item.quantity,
+            }
+        })
 
         return res.json({ success: true, message: "Order Place successfully"})
 
