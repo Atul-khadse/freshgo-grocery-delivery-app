@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const Cart = () => {
     const [showAddress, setShowAddress] = useState(false);
-    const { products, cartItems, currency, removeCartItem, getCartCount, updateCartItem, getCartAmount, navigate, axios } = useAppContext();
+    const { products, cartItems, currency, removeCartItem, getCartCount, updateCartItem, getCartAmount, navigate, axios, user } = useAppContext();
 
     const [cartArray, setCartArray] = useState([]);
     const [addresses, setAddresses] = useState([]);
@@ -53,6 +53,15 @@ const Cart = () => {
             getCart();
         }
     }, [products, cartItems]);
+
+
+useEffect(() =>{
+    if (user) {
+        getUserAddress();
+    }
+})
+
+
 
     return products.length > 0 && cartItems ? (
         <div className="flex flex-col md:flex-row mt-16 px-4 md:px-8 lg:px-16">
