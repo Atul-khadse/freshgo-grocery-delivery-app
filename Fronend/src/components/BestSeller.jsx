@@ -1,9 +1,12 @@
 import React from 'react';
 import ProductCard from './ProductCard';
-import { useAppContext } from '../context/AppContext';
+import { useAppContext } from '../context/AppContext.jsx';
 
 const BestSeller = () => {
   const { products } = useAppContext();
+
+
+  
 
   return (
     <section className="mt-12 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20">
