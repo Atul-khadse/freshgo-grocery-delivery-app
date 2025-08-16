@@ -45,7 +45,14 @@ const Cart = () => {
 
 
 
-    const placeOrder = async () => {};
+    const placeOrder = async () => {
+
+    };
+
+
+
+
+    
 
     useEffect(() => {
         if (products.length > 0 && cartItems) {
@@ -58,7 +65,7 @@ useEffect(() =>{
     if (user) {
         getUserAddress();
     }
-})
+}, [user])
 
 
 
@@ -128,7 +135,7 @@ useEffect(() =>{
                         {showAddress && (
                             <div className="absolute top-8 left-0 w-full border bg-white z-10 shadow-md rounded">
                                 {addresses.map((address, i) => (
-                                    <p key={i} onClick={() => { setSelectedAddress(address); setShowAddress(false); }} className="p-2 hover:bg-gray-100 cursor-pointer">
+                                    <p key={i} onClick={() => { setSelectedAddress({...address}); setShowAddress(false); }} className="p-2 hover:bg-gray-100 cursor-pointer">
                                         {address.street}, {address.city}, {address.state}, {address.country}
                                     </p>
                                 ))}
