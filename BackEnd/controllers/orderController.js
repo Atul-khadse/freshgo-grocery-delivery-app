@@ -1,5 +1,6 @@
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
+import User from '../models/User.js'
 import Stripe from "stripe";
 
 
@@ -56,7 +57,36 @@ export const stripeWebhooks =  async (request, response ) =>{
     } catch (error) {
         response.status(400).send(`webhook error: ${error.message}`)
     }
+
+// handel event
+switch (event.type) {
+    case "payment_intent.succeeded":{
+        const paymentIntent = event.data.object;
+        const paymentIntentId = paymentIntent.id;
+
+        const session = await stripeInstance.checkout.sessions.list({
+            payment_intent: paymentIntentId,
+
+        });
+
+        const { orderId, userId }  = session.data[0].metadata;
+
+        // mark payment as paid
+
+        await Order.findByIdAndUpdate(orderId, {isPaid: true})
+
+        // clear user cart
+        await User.findByIdAndUpdate(userId, {cartItems: {}})
+    }
+        
+        break;
+
+    default:
+        break;
 }
+
+}
+
 
 
 
