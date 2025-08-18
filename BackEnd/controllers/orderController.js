@@ -39,6 +39,28 @@ export const placeOrderCOD = async (req ,res) =>{
 
 
 
+
+// stripe webhook to verify payment action
+export const stripeWebhooks =  async (request, response ) =>{
+    const stripeInstance = new Stripe(process.env.STRIPE_SECRETE_KEY);
+
+    const sig = req.headers["stripe-signature"];
+    let event;
+
+    try {
+        event = stripeInstance.webhooks.constructEvent(
+            request.body,
+            sig,
+            process.env.STRIPE_WEBHOOK_SECRET,
+        );
+    } catch (error) {
+        response.status(400).send(`webhook error: ${error.message}`)
+    }
+}
+
+
+
+
 // get orders by user id
 export const getUserOrders = async (req, res) =>{
     try {
