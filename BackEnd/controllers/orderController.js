@@ -89,14 +89,20 @@ switch (event.type) {
 
         });
 
-        const { orderId, userId }  = session.data[0].metadata;
+        const { orderId }  = session.data[0].metadata;
+
+        await Order.findByIdAndDelete(orderId);
+        break;
      }
         
        
 
     default:
+        console.error(`Unhandle event type ${event.type}`)
         break;
 }
+
+response.json({ received :true})
 
 }
 
