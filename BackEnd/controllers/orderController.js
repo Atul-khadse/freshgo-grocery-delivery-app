@@ -77,9 +77,22 @@ switch (event.type) {
 
         // clear user cart
         await User.findByIdAndUpdate(userId, {cartItems: {}})
+
+         break;
     }
+     case "payment_intent.payment_failed":{
+         const paymentIntent = event.data.object;
+        const paymentIntentId = paymentIntent.id;
+
+        const session = await stripeInstance.checkout.sessions.list({
+            payment_intent: paymentIntentId,
+
+        });
+
+        const { orderId, userId }  = session.data[0].metadata;
+     }
         
-        break;
+       
 
     default:
         break;
