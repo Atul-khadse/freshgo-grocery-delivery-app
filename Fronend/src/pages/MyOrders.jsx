@@ -41,7 +41,15 @@ const MyOrders = () => {
           >
             <p className="flex flex-col sm:flex-row sm:items-center sm:gap-6 text-sm sm:text-base mb-6 flex-wrap">
               <span className="truncate max-w-xs">OrderId: {order._id}</span>
-              <span>Payment: {order.paymentType}</span>
+              <span>
+  Payment: {order.paymentType} 
+  {order.paymentType === "Online" && (
+    <span className="ml-1">
+      ({order.isPaid ? "Paid" : "Pending"})
+    </span>
+  )}
+</span>
+
               <span>Total Amount: {currency}{order.amount}</span>
             </p>
 
