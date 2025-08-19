@@ -28,10 +28,10 @@ export const placeOrderCOD = async (req, res) => {
             amount,
             address,
             paymentType: "COD",
-            isPaid: false,
+
         });
 
-         await User.findByIdAndUpdate(userId, { cartItems: [] });
+        await User.findByIdAndUpdate(userId, { cartItems: [] });
 
         return res.json({ success: true, message: "Order Place successfully" })
 
@@ -58,7 +58,7 @@ export const stripeWebhooks = async (request, response) => {
             process.env.STRIPE_WEBHOOK_SECRET,
         );
     } catch (error) {
-        response.status(400).send(`webhook error: ${error.message}`)
+        return response.status(400).send(`webhook error: ${error.message}`)
     }
 
     // handel event
@@ -67,19 +67,32 @@ export const stripeWebhooks = async (request, response) => {
             const paymentIntent = event.data.object;
             const paymentIntentId = paymentIntent.id;
 
-            const session = await stripeInstance.checkout.sessions.list({
+            const session = (await stripeInstance.checkout.sessions.list({
                 payment_intent: paymentIntentId,
 
-            });
+            })).data[0];
 
-            const { orderId, userId } = session.data[0].metadata;
+
+            if (!session) {
+                console.error("No session found for this payment_intent:", paymentIntentId);
+                return response.status(404).send("Session not found");
+            }
+
+            const { orderId, userId } = session.metadata;
 
             // mark payment as paid
 
-            await Order.findByIdAndUpdate(orderId, { isPaid: true })
+            try {
+                await Order.findByIdAndUpdate(orderId, { isPaid: true });
+                // clear user cart
+                await User.findByIdAndUpdate(userId, { cartItems: [] });
+            } catch (err) {
+                console.error("Failed to update order or user:", err);
+            }
+
 
             // clear user cart
-            await User.findByIdAndUpdate(userId, { cartItems: [] })
+
 
             break;
         }
@@ -183,6 +196,7 @@ export const placeOrderStripe = async (req, res) => {
             amount,
             address,
             paymentType: "Online",
+            isPaid: false,
         });
 
 

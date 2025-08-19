@@ -1,6 +1,6 @@
 import fruits from './fruits.jpg';
 import vegetables from './vegetables.jpg';
-import organicProduce from './organic_produce.jpg';
+import organicProduce from './Organic_Produce.jpg';
 import cool_drinks from './cool_drink.jpg';
 
 import instantFood from './instant_food.jpg';
